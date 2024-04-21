@@ -5,18 +5,16 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORTA = process.env.PORTA || 3000;
 
-// Configuração da conexão com o PostgreSQL
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'cadPessoas',
     password: 'postgres',
-    port: 5432, // Porta padrão do PostgreSQL
+    port: 5432, 
 });
 
 app.use(bodyParser.json());
 
-// Rota para cadastrar uma pessoa
 app.post('/pessoa', async (req, res) => {
     const { nome, email, senha } = req.body;
 
@@ -40,7 +38,6 @@ app.post('/pessoa', async (req, res) => {
     }
 });
 
-// Rota para buscar todas as pessoas
 app.get('/pessoa', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM pessoa');
@@ -52,7 +49,6 @@ app.get('/pessoa', async (req, res) => {
     }
 });
 
-// Rota para atualizar uma pessoa
 app.put('/pessoa/:id', async (req, res) => {
     const { nome, email, senha } = req.body;
     const id = req.params.id;
@@ -77,7 +73,6 @@ app.put('/pessoa/:id', async (req, res) => {
     }
 });
 
-// Rota para deletar uma pessoa
 app.delete('/pessoa/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -93,7 +88,6 @@ app.delete('/pessoa/:id', async (req, res) => {
     }
 });
 
-// Inicia o servidor
 app.listen(PORTA, () => {
     console.log(`Servidor rodando na porta ${PORTA}`);
 });
