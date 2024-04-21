@@ -91,3 +91,8 @@ app.delete('/pessoa/:id', async (req, res) => {
 app.listen(PORTA, () => {
     console.log(`Servidor rodando na porta ${PORTA}`);
 });
+
+
+/*SELECT * 
+FROM pessoa
+ORDER BY pessoa.id */
